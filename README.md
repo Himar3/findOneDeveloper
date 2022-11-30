@@ -1,5 +1,5 @@
 # ![](url)
-# TITLE: findOneDeveloper
+#findOneDeveloper
 TYPE: Project-3 Full Stack
 
 AUTHORS: @dearmascarlos @himar3
