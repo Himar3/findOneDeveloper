@@ -1,4 +1,4 @@
-# ![](https://1drv.ms/u/s!AvZ29iFbDKgts30XOOwTo52MBXZn?e=96ILCb)
+# ![]([https://1drv.ms/u/s!AvZ29iFbDKgts30XOOwTo52MBXZn?e=96ILCb](https://am3pap006files.storage.live.com/y4mLCqfL67qpWCBUOOqKY8Sez6BsVwXlV2JrJw9iAfEJtGkSxppKgPv_-F0hCGDsnilFh_YYpvEk_wAZjFFoEbJL3b5XmJSsOWOBmQVPbk9yv3_j2BO_hqyx19jee3PTGgZr1sY2LMybbC0yW8iLDnSAntJ0mb8O1HMbtR3NiCTiFBWzY7RYHnxzLM2gwFndyDhB1Hl82EAMeT5eqTNuxZzXGkQdkp5PU8ID4BJ7OXw5g4?encodeFailures=1&width=620&height=150))
 # findOneDeveloper
 Type: Project-3 Full Stack
 
