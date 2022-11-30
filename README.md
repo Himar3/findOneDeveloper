@@ -1,13 +1,13 @@
 # ![](url)
 # findOneDeveloper
-TYPE: Project-3 Full Stack
+Type: Project-3 Full Stack
 
-AUTHORS: @dearmascarlos @himar3
+Authors: @dearmascarlos @himar3
 
 Description:
 
 
-ENDPOINTS
+### ENDPOINTS
 
 ### AUTH Signup/Login
 
