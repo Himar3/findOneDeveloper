@@ -1,4 +1,4 @@
-# ![](https://raw.githubusercontent.com/Himar3/findOneDeveloper/main/assets)
+# ![](https://raw.githubusercontent.com/Himar3/findOneDeveloper/main/Assets/findOneLogo5.png)
 # findOneDeveloper
 Type: Project-3 Full Stack
 
