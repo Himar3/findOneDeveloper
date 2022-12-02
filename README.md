@@ -2,7 +2,7 @@
 
 Type: Project-3 Full Stack
 
-Authors: @dearmascarlos @himar3
+Authors: @dearmascarlos @himar3 https://github.com/Himar3
 
 Description:
 
