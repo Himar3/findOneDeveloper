@@ -1,6 +1,4 @@
 
-
-
 const addRelationsModels = () => {
     try {
         console.log('Relations added to models')
