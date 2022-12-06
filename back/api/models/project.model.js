@@ -24,4 +24,4 @@ const Project = sequelize.define(
     { timestamps: false }
 )
 
-module.exports
+module.exports = Project

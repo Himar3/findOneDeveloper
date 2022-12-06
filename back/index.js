@@ -9,14 +9,15 @@ const addRelationsModels = require('./database/relations.js')
 const checkAndSync = async () => {
     await checkConnection()
     addRelationsModels ()
-    await syncModels('force')
+    await syncModels()
 }
 
 const listeningExpress =  () => {
     const app = express()
-    app.use(cors())
-    app.use('/api', require('./api/routes'))
-    app.listen(process.env.PORT, () => {
+        .use(cors())
+        .use(express.json())
+        .use('/api', require('./api/routes/index.js'))
+        .listen(process.env.PORT, () => {
         console.log(`Listening on port: ${process.env.PORT}`)
     })
 }

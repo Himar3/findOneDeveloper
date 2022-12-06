@@ -37,6 +37,27 @@ const getAllUsers = async(req, res) => {
     }
 }
 
+const updateOwnProfile = async (req, res) => {
+    try {
+        const [ , user] = await User.update(req.body, {
+            returning: true,
+            where: {
+                id: res.locals.user.id
+            }
+        })
+        const data = user[0].dataValues
+        return !user ? res.status(404).send('Developer not found') : res.status(200).json({
+            msg: 'User updated',
+            name: data.name,
+            email: data.email,
+            image: data.image,
+            about: data.about
+        })
+    } catch (error) {
+        return res.status(500).send(error.message)
+    }
+} 
+
 const deleteOwnProfile = async(req, res) => {
     try {
         const user = await User.destroy({
@@ -54,5 +75,6 @@ module.exports = {
     getOwnProfile,
     getAllUsers,
     getUserById,
+    updateOwnProfile,
     deleteOwnProfile
 }

@@ -5,12 +5,14 @@ const {
     getOwnProfile,
     getAllUsers,
     getUserById,
+    updateOwnProfile,
     deleteOwnProfile
 } = require ('../controllers/user.controller')
 
-router.get('/self',  checkAuth,getOwnProfile)
+router.get('/profile', checkAuth, getOwnProfile)
 router.get('/', checkAuth, getAllUsers)
 router.get('/:id', checkAuth, getUserById)
-router.delete('/', checkAuth, deleteOwnProfile)
+router.put('/profile', checkAuth, updateOwnProfile)
+router.delete('/profile', checkAuth, deleteOwnProfile)
 
 module.exports = router

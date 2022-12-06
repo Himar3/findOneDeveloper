@@ -8,7 +8,7 @@ const signup = async(req, res) => {
     req.body.password = bcrypt.hashSync(req.body.password, 10)
     const user = await User.create(req.body,
         {
-        fields: ['name', 'email', 'password', 'img', 'about']
+        fields: ['name', 'email', 'password', 'image', 'about']
     })
 
     const payload = { email: user.email }

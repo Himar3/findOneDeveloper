@@ -1,15 +1,19 @@
 const Project = require('../models/project.model.js')
+const User = require('../models/user.model.js')
 
-const createProject = async () => {
-    try {
-        const project = await Project.create(req.body, {
-            fields: ['title', 'description', 'link', 'image', 'team']
-        })
-        return res.status(200).json(project)
-    } catch (error) {
-        return res.status(500).send(error)
-    }
-}
+// const createProject = async (req, res) => {
+//     try {
+//         const author = await User.findByPk(res.locals.user.id)
+//         const project = await author.createProject(req.body, {
+//             fields: ['title', 'description']
+//         })
+//         console.log('este')
+//         return res.status(200).json({project})
+//     } catch (error) {
+//         console.log('este es el error')
+//         return res.status(500).send(error)
+//     }
+// }
 
 const getAllProjects = async () => {
     try {
@@ -46,4 +50,4 @@ const getOwnProjects = async () => {
     }
 }
 
-module.exports = { createProject, getAllProjects, getOneProject, getOwnProjects }
+module.exports = { /*createProject,*/ getAllProjects, getOneProject, getOwnProjects }

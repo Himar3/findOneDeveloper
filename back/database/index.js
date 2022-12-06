@@ -19,12 +19,12 @@ const checkConnection = async () => {
 const syncModels = async (value) => {
     const state = {
         alter: { alter: true },
-        force: {force : true },
+        force: { force : true },
     }
 
     try {
         await sequelize.sync(state[value] || '')
-        console.log(`findOneModels were synchronized successfully(${JSON.stringify(state[value]) || ''}).`)
+        console.log(`findOneDev Models were synchronized successfully(${JSON.stringify(state[value]) || ''}).`)
     } catch (error) {
         throw error
     }
