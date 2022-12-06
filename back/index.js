@@ -4,6 +4,13 @@ const express = require('express')
 const cors = require('cors')
 
 const { checkConnection, syncModels } = require('./database/index.js')
+const addRelationsModels = require('./database/relations.js')
+
+const checkAndSync = async () => {
+    await checkConnection()
+    addRelationsModels ()
+    await syncModels('force')
+}
 
 const listeningExpress =  () => {
     const app = express()
@@ -12,12 +19,6 @@ const listeningExpress =  () => {
     app.listen(process.env.PORT, () => {
         console.log(`Listening on port: ${process.env.PORT}`)
     })
-}
-
-const checkAndSync = async () => {
-    await checkConnection()
-    // funcion de addRelationsModels
-    await syncModels()
 }
 
 (async function startAPI() {
