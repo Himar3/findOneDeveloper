@@ -1,13 +1,22 @@
-const User = require ('../models/user.model')
+const User = require('../models/user.model')
+const Tech = require('../models/tech.model')
+
 
 const getOwnProfile = async(req, res) => {
     try {
         const user = await User.findByPk(res.locals.user.id, {
+            include: [{model: Tech}],
             attributes: {
-                exclude: ['id', 'password', 'role',]
+                exclude: ['id', 'password', 'role']
             }
         }) 
-        return !user ? res.status(404).send('User not found') : res.status(200).json(user)
+        return !user ? res.status(404).send('User not found') : res.status(200).json({
+            name: user.name,
+            email: user.email,
+            image: user.image,
+            about: user.about,
+            tech: user.teches.map(( tech ) => {return tech.name})
+        })
     } catch (error) {
         return res.status(500).send(error.message)
     }

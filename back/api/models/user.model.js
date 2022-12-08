@@ -27,7 +27,7 @@ const User = sequelize.define(
             type: DataTypes.STRING
         },
         about: {
-            type: DataTypes.STRING
+            type: DataTypes.TEXT
         },
         role: {
             type: DataTypes.ENUM('visitant', 'user', 'admin'),
