@@ -10,7 +10,7 @@ const {
 } = require ('../controllers/user.controller')
 
 router.get('/profile', checkAuth, getOwnProfile)
-router.get('/', checkAuth, getAllUsers)
+router.get('/', getAllUsers)
 router.get('/:id', checkAuth, getUserById)
 router.put('/profile', checkAuth, updateOwnProfile)
 router.delete('/profile', checkAuth, deleteOwnProfile)

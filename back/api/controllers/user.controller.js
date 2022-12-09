@@ -22,6 +22,26 @@ const getOwnProfile = async(req, res) => {
     }
 }
 
+const getAllUsers = async(req, res) => {
+    try {
+        const users = await User.findAll({
+            include: [{model: Tech}],
+            attributes: { exclude: [ 'id', 'password', 'role']
+        }})
+        return !users ? res.status(404).send('Users not found') : res.status(200).json(
+            users.map((user) =>  {
+                return ({
+                name: user.name,
+                image: user.image,
+                tech: user.teches.map(( tech ) => {return tech.name})
+            })
+            })
+        )
+    } catch (error) {
+      return res.status(500).send(error.message)
+    }
+}
+
 const getUserById = async(req, res) => {
     try {
         const user = await User.findByPk(req.params.id, {
@@ -35,16 +55,6 @@ const getUserById = async(req, res) => {
     }
 }
 
-const getAllUsers = async(req, res) => {
-    try {
-        const users = await User.findAll({
-            attributes: { exclude: ['password']
-        }})
-        return !users ? res.status(404).send('Users not found') : res.status(200).json(users)
-    } catch (error) {
-      return res.status(500).send(error.message)
-    }
-}
 
 const updateOwnProfile = async (req, res) => {
     try {
