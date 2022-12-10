@@ -33,6 +33,7 @@ const getAllUsers = async(req, res) => {
                 return ({
                 name: user.name,
                 image: user.image,
+                about: user.about,
                 tech: user.teches.map(( tech ) => {return tech.name})
             })
             })
