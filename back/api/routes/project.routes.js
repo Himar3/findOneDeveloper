@@ -2,7 +2,7 @@ const router = require('express').Router()
 const { checkAuth, checkRole } = require('../utils')
 
 const { 
-    createProject, 
+    createProjects, 
     getAllProjects,
     getOneProject,
     getOwnProjects, 
@@ -12,7 +12,7 @@ const {
 
 
 
-router.post('/', checkAuth, createProject)
+router.post('/', checkAuth, createProjects)
 router.get('/', getAllProjects)
 router.get('/profile', checkAuth, getOwnProjects)
 router.get('/:id', checkAuth, getOneProject)

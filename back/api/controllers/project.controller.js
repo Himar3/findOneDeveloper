@@ -1,11 +1,12 @@
-const { title } = require('process')
 const Project = require('../models/project.model.js')
+const Tech = require('../models/tech.model.js')
 const User = require('../models/user.model.js')
 
-const createProject = async (req, res) => {
+
+const createProjects = async (req, res) => {
     try {
         const project = await res.locals.user.createProject(req.body, {
-            fields: ['title', 'description', 'image', 'link', 'team']
+            fields: ['id', 'title', 'description', 'image', 'link', 'team']
         })
         return res.status(200).json(project)
     } catch (error) {
@@ -15,8 +16,21 @@ const createProject = async (req, res) => {
 
 const getAllProjects = async (req, res) => {
     try {
-        const projects = await Project.findAll()
-        return res.status(200).json(projects)
+        const projects = await Project.findAll({
+            include: [{model: Tech}]
+        })
+        return res.status(200).json(
+            projects.map((project) => {
+                return ({
+                    title: project.title,
+                    description: project.description,
+                    link: project.link,
+                    image: project.image,
+                    team: project.team,
+                    tech: project.teches.map(( tech ) => {return tech.name})
+                })
+            })   
+        )
     } catch (error) {
         return res.status(500).send(error)
     }
@@ -101,4 +115,4 @@ const deleteOwnProject = async (req, res) => {
     }
 }
 
-module.exports = { createProject, getAllProjects, getOneProject, getOwnProjects, updateOwnProject, deleteOwnProject }
+module.exports = { createProjects, getAllProjects, getOneProject, getOwnProjects, updateOwnProject, deleteOwnProject }

@@ -31,11 +31,11 @@ const getAllUsers = async(req, res) => {
         return !users ? res.status(404).send('Users not found') : res.status(200).json(
             users.map((user) =>  {
                 return ({
-                name: user.name,
-                image: user.image,
-                about: user.about,
-                tech: user.teches.map(( tech ) => {return tech.name})
-            })
+                    name: user.name,
+                    image: user.image,
+                    about: user.about,
+                    tech: user.teches.map(( tech ) => {return tech.name})
+                })
             })
         )
     } catch (error) {

@@ -9,7 +9,7 @@ const Project = sequelize.define(
             allowNull: false
         },
         description: {
-            type: DataTypes.STRING
+            type: DataTypes.TEXT
         },
         link: {
             type: DataTypes.STRING
