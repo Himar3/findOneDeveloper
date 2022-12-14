@@ -34,6 +34,7 @@ const getAllUsers = async(req, res) => {
                 return ({
                     id: user.id,
                     name: user.name,
+                    email: user.email,
                     image: user.image,
                     about: user.about,
                     tech: user.teches.map(( tech ) => {return tech.name})
@@ -48,11 +49,19 @@ const getAllUsers = async(req, res) => {
 const getUserById = async(req, res) => {
     try {
         const user = await User.findByPk(req.params.id, {
+            include: [{model:Tech}],
             attributes: {
                 exclude: ['password']
             }
         })
-        return !user ? res.status(404).send('User not found') : res.status(200).json(user)
+        return !user ? res.status(404).send('User not found') : res.status(200).json({
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            image: user.image,
+            about: user.about,
+            tech: user.teches.map(( tech ) => {return tech.name})
+        })
     } catch (error) {
       return res.status(500).send(error.message)
     }
@@ -62,6 +71,7 @@ const getUserById = async(req, res) => {
 const updateOwnProfile = async (req, res) => {
     try {
         const [ , user] = await User.update(req.body, {
+            include: [{ model: Tech }],
             returning: true,
             where: {
                 id: res.locals.user.id
@@ -74,7 +84,8 @@ const updateOwnProfile = async (req, res) => {
             name: data.name,
             email: data.email,
             image: data.image,
-            about: data.about
+            about: data.about,
+            tech: user.teches.map(( tech ) => {return tech.name})
         })
     } catch (error) {
         return res.status(500).send(error.message)
