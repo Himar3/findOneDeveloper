@@ -22,6 +22,7 @@ const getAllProjects = async (req, res) => {
         return res.status(200).json(
             projects.map((project) => {
                 return ({
+                    id: project.id,
                     title: project.title,
                     description: project.description,
                     link: project.link,
@@ -39,11 +40,21 @@ const getAllProjects = async (req, res) => {
 const getOneProject = async (req, res) => {
     try {
         const project = await Project.findOne({
+            include: [{model: Tech}],
             where: {
                 id: req.params.id
             }
         })
-        return project ? res.status(200).json(project) : res.status(404).send('Project not found')
+        return project ? res.status(200).json({
+            id: project.id,
+            title: project.title,
+            description: project.description,
+            link: project.link,
+            image: project.image,
+            team: project.team.map(( dev ) => {return dev}),
+            tech: project.teches.map(( tech ) => {return tech.name})
+
+        }) : res.status(404).send('Project not found')
     } catch (error) {
         return res.status(500).send(error)
     }
@@ -81,6 +92,7 @@ const updateOwnProject = async (req, res) => {
             })
             const data = project[0].dataValues
             return res.status(200).json({
+                id: data.id,
                 title: data.title,
                 description: data.description,
                 image: data.image,

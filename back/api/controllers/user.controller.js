@@ -7,10 +7,11 @@ const getOwnProfile = async(req, res) => {
         const user = await User.findByPk(res.locals.user.id, {
             include: [{model: Tech}],
             attributes: {
-                exclude: ['id', 'password', 'role']
+                exclude: ['password']
             }
         }) 
         return !user ? res.status(404).send('User not found') : res.status(200).json({
+            id: user.id,
             name: user.name,
             email: user.email,
             image: user.image,
@@ -26,11 +27,12 @@ const getAllUsers = async(req, res) => {
     try {
         const users = await User.findAll({
             include: [{model: Tech}],
-            attributes: { exclude: [ 'id', 'password', 'role']
+            attributes: { exclude: ['password']
         }})
         return !users ? res.status(404).send('Users not found') : res.status(200).json(
             users.map((user) =>  {
                 return ({
+                    id: user.id,
                     name: user.name,
                     image: user.image,
                     about: user.about,
@@ -47,7 +49,7 @@ const getUserById = async(req, res) => {
     try {
         const user = await User.findByPk(req.params.id, {
             attributes: {
-                exclude: ['id', 'password', 'role']
+                exclude: ['password']
             }
         })
         return !user ? res.status(404).send('User not found') : res.status(200).json(user)
@@ -68,6 +70,7 @@ const updateOwnProfile = async (req, res) => {
         const data = user[0].dataValues
         return !user ? res.status(404).send('Developer not found') : res.status(200).json({
             msg: 'User updated',
+            id: data.id,
             name: data.name,
             email: data.email,
             image: data.image,
