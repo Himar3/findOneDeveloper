@@ -8,7 +8,7 @@ const {
 } = require ('../controllers/tech.controller')
 
 router.post('/profile', checkAuth, addTechToUser)
-router.get('/', checkAuth, getAllTechs)
+router.get('/', getAllTechs)
 router.get('/:id', getTechByUserId)
 
 module.exports = router

@@ -12,7 +12,7 @@ const signup = async(req, res) => {
     })
 
     const payload = { email: user.email }
-    const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '1h' })
+    const token = jwt.sign(payload, process.env.SECRET/*, { expiresIn: '24h' }*/) 
 
     return res.status(200).json({ message: 'User created!', email: user.email, token: token })
   } catch (error) {
@@ -34,7 +34,7 @@ const login = async(req, res) => {
       if (!result) return res.status(401).send('Email or password incorrect')
 
       const payload = { email: user.email }
-      const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '3h' })
+      const token = jwt.sign(payload, process.env.SECRET/*, { expiresIn: '24h' }*/)
 
       return res.status(200).json({ 
         msg: 'Logged in',

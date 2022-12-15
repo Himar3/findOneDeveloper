@@ -11,7 +11,7 @@ const {
 
 router.get('/profile', checkAuth, getOwnProfile)
 router.get('/', getAllUsers)
-router.get('/:id', getUserById)
+router.get('/:id', checkAuth, getUserById)
 router.put('/profile', checkAuth, updateOwnProfile)
 router.delete('/profile', checkAuth, deleteOwnProfile)
 

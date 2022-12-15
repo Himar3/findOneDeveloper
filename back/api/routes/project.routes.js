@@ -15,7 +15,7 @@ const {
 router.post('/', checkAuth, createProjects)
 router.get('/', getAllProjects)
 router.get('/profile', checkAuth, getOwnProjects)
-router.get('/:id', getOneProject)
+router.get('/:id', checkAuth, getOneProject)
 router.put('/:id', checkAuth, updateOwnProject)
 router.delete('/:id', checkAuth, deleteOwnProject)
 

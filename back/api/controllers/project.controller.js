@@ -23,6 +23,7 @@ const getAllProjects = async (req, res) => {
             projects.map((project) => {
                 return ({
                     id: project.id,
+                    userId: project.userId,
                     title: project.title,
                     description: project.description,
                     link: project.link,
@@ -47,6 +48,7 @@ const getOneProject = async (req, res) => {
         })
         return project ? res.status(200).json({
             id: project.id,
+            userId: project.userId,
             title: project.title,
             description: project.description,
             link: project.link,
@@ -93,6 +95,7 @@ const updateOwnProject = async (req, res) => {
             const data = project[0].dataValues
             return res.status(200).json({
                 id: data.id,
+                userId: data.userId,
                 title: data.title,
                 description: data.description,
                 image: data.image,
