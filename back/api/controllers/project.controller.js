@@ -5,12 +5,10 @@ const User = require('../models/user.model.js')
 
 const createProjects = async (req, res) => {
     try {
-        const project = await res.locals.user.createProject(req.body, {
-            fields: ['id', 'title', 'description', 'image', 'link', 'team']
-        })
+        const project = await res.locals.user.createProject(req.body)
         return res.status(200).json(project)
     } catch (error) {
-        return res.status(500).send(error)
+        return res.status(500).json(error)
     }
 }
 
