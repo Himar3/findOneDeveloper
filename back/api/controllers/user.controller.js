@@ -71,21 +71,20 @@ const getUserById = async(req, res) => {
 const updateOwnProfile = async (req, res) => {
     try {
         const [ , user] = await User.update(req.body, {
-            include: [{ model: Tech }],
             returning: true,
             where: {
                 id: res.locals.user.id
             }
         })
         const data = user[0].dataValues
+        console.log(data)
         return !user ? res.status(404).send('Developer not found') : res.status(200).json({
             msg: 'User updated',
             id: data.id,
             name: data.name,
             email: data.email,
             image: data.image,
-            about: data.about,
-            tech: user.teches.map(( tech ) => {return tech.name})
+            about: data.about
         })
     } catch (error) {
         return res.status(500).send(error.message)
