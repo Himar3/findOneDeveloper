@@ -69,11 +69,8 @@ const getUserById = async(req, res) => {
 
 
 const updateOwnProfile = async (req, res) => {
-        console.log('antes del try')
     try {
-        console.log('dentro del try')
         const [ , user] = await User.update(req.body, {
-            include: [{ model: Tech }],
             returning: true,
             where: {
                 id: res.locals.user.id
@@ -86,11 +83,9 @@ const updateOwnProfile = async (req, res) => {
             name: data.name,
             email: data.email,
             image: data.image,
-            about: data.about,
-            // tech: user.teches.map(( tech ) => {return tech.name})
+            about: data.about
         })
     } catch (error) {
-        console.log('error en catch')
         return res.status(500).send(error.message)
     }
 } 

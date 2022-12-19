@@ -14,9 +14,15 @@ const getAllTechs = async(req, res) => {
 const addTechToUser = async(req, res) => {
     try {
         const user = await User.findByPk(res.locals.user.id)
-        const tech = await Tech.findByPk(req.body.techId)
-
-        await user.addTech(tech)
+        const techs = req.body.techs
+        for (let i = 0; i < techs.length; i++) {
+           const tech = await Tech.findOne({
+            where: {
+                name: techs[i]
+            }
+        })
+           await user.addTech(tech)
+        }       
 
         return res.status(200).send('Tech added')
     } catch (error) {
@@ -27,10 +33,16 @@ const addTechToUser = async(req, res) => {
 const addTechToProject = async(req, res) => {
     try {
         const project = await Project.findByPk(req.body.projectId)
-        const tech = await Tech.findByPk(req.body.techId)
+        const techs = req.body.techs
+        for (let i = 0; i < techs.length; i++) {
+            const tech = await Tech.findOne({
+                where: {
+                    name: techs[i]
+                }
+            })
+            await project.addTech(tech)
+        }   
 
-        await project.addTech(tech)
-        
         return res.status(200).send('Tech added')
     } catch (error) {
         return res.status(500).send(error.message)

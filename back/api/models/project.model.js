@@ -12,10 +12,10 @@ const Project = sequelize.define(
             type: DataTypes.TEXT
         },
         link: {
-            type: DataTypes.STRING
+            type: DataTypes.TEXT
         },
         image: {
-            type: DataTypes.STRING
+            type: DataTypes.TEXT
         },
         team: {
             type: DataTypes.ARRAY(DataTypes.STRING)
