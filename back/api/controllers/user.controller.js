@@ -77,7 +77,6 @@ const updateOwnProfile = async (req, res) => {
             }
         })
         const data = user[0].dataValues
-        console.log(data)
         return !user ? res.status(404).send('Developer not found') : res.status(200).json({
             msg: 'User updated',
             id: data.id,

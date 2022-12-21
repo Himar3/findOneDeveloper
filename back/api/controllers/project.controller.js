@@ -63,11 +63,52 @@ const getOneProject = async (req, res) => {
 const getOwnProjects = async (req, res) => {
     try {
         const projects = await Project.findAll({
+            include: [{model: Tech}],
             where: {
                 userId: res.locals.user.id
             }
         })
-        return projects ? res.status(200).json(projects) : res.status(404).send(`You don't have any project`)
+        return res.status(200).json(
+            projects.map((project) => {
+                return ({
+                    id: project.id,
+                    userId: project.userId,
+                    title: project.title,
+                    description: project.description,
+                    link: project.link,
+                    image: project.image,
+                    team: project.team,
+                    tech: project.teches.map(( tech ) => {return tech.name})
+                })
+            })   
+        )
+    } catch (error) {
+        return res.status(500).send(error)
+    }
+}
+
+const getProjectsByUser = async (req, res) => {
+    try {
+        const projects = await Project.findAll({
+            include: [{model: Tech}],
+            where: {
+                userId: req.params.id
+            }
+        })
+        return res.status(200).json(
+            projects.map((project) => {
+                return ({
+                    id: project.id,
+                    userId: project.userId,
+                    title: project.title,
+                    description: project.description,
+                    link: project.link,
+                    image: project.image,
+                    team: project.team,
+                    tech: project.teches.map(( tech ) => {return tech.name})
+                })
+            })   
+        )
     } catch (error) {
         return res.status(500).send(error)
     }
@@ -128,4 +169,4 @@ const deleteOwnProject = async (req, res) => {
     }
 }
 
-module.exports = { createProjects, getAllProjects, getOneProject, getOwnProjects, updateOwnProject, deleteOwnProject }
+module.exports = { createProjects, getAllProjects, getOneProject, getOwnProjects, updateOwnProject, deleteOwnProject, getProjectsByUser }
