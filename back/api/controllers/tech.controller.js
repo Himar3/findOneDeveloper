@@ -49,4 +49,13 @@ const getTechByUserId = async(req, res) => {
     }
 }
 
-module.exports = { getAllTechs, addTechToUser, getTechByUserId, addTechToProject }
+const createTechDefault = async(req, res) => {
+    try {
+        const tech = await Tech.create(req.body)
+        return res.status(200).json(tech)
+    } catch (error) {
+        return res.status(500).send(error.message)
+    }
+}
+
+module.exports = { getAllTechs, addTechToUser, getTechByUserId, addTechToProject, createTechDefault }
