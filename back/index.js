@@ -9,7 +9,7 @@ const addRelationsModels = require('./database/relations.js')
 const checkAndSync = async () => {
     await checkConnection()
     addRelationsModels ()
-    await syncModels('force')
+    await syncModels()
 }
 
 const listeningExpress =  () => {
